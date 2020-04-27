@@ -200,7 +200,7 @@ function sendData() {
 		data += "\"ULV\":"+ULV;
 		dataExists = true;
 	}
-	data += "\"id \": "+dataId;
+	data += ",\"ID\": "+dataId;
 	data += "}";
 	console.log("DATA LENGTH");
 	console.log(data.length);
