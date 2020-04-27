@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="http://mota.technology/StudentDepressionStudy" version="1.0.0" viewmodes="maximized">
+    <tizen:application id="QMwOtpDbtj.StudentDepressionStudy" package="QMwOtpDbtj" required_version="4.0"/>
+    <content src="index.html"/>
+    <feature name="http://tizen.org/feature/screen.size.all"/>
+    <icon src="icon.png"/>
+    <name>StudentDepressionStudy</name>
+    <tizen:profile name="wearable"/>
+    <tizen:privilege name="http://tizen.org/privilege/power"/>
+    <tizen:privilege name="http://tizen.org/privilege/healthinfo"/>
+    <tizen:privilege name="http://tizen.org/privilege/internet"/>    
+    <tizen:setting background-support="enable" encryption="disable" hwkey-event="enable"/>
+    <access origin="*" subdomains="true"/>
+    <tizen:background-category value="sensor_logger"/>
+</widget>

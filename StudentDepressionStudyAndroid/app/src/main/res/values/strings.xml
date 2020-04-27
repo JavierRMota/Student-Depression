@@ -1,0 +1,86 @@
+<resources>
+    <string name="app_name">Estudio de depresión en alumnos</string>
+    <string name="title_home">Inicio</string>
+    <string name="title_log">Bitacora</string>
+    <string name="title_dashboard">Información</string>
+    <string name="title_notifications">Notificaciones</string>
+
+    <string name="ok">Aceptar</string>
+    <string name="cancel">Cancelar</string>
+
+    <string name="connect_to_shealth">Conectar con Samsung Health</string>
+
+    <string name="notice">Aviso</string>
+    <string name="msg_perm_acquired">Se requieren todos los permisos</string>
+    <string name="msg_conn_not_available">La conexión con Samsung Health no está disponible</string>
+    <string name="msg_req_install">Por favor instala Samsung Health</string>
+    <string name="msg_req_upgrade">Por favor actualiza Samsung Health</string>
+    <string name="msg_req_enable">Por favor habilita Samsung Health</string>
+    <string name="msg_req_agree">Por favor acepta la política de Samsung Health</string>
+    <string name="msg_req_available">Please make Samsung Health available</string>
+
+    <string name="send">Enviar datos</string>
+    <string name="update">Actualizar datos</string>
+
+    <string name="home_title">Motivo del estudio</string>
+    <string name="home_description">El proyecto tiene como objetivo detectar y analizar de manera eficaz, algún estado de alteración, como falta de ánimo, estrés o cierto grado de depresión, con base en la información obtenida a partir de los sensores en el reloj inteligente y el algoritmo de aprendizaje automático.</string>
+
+    <string name="device_id">Autogenerado</string>
+    <string name="user_name">Alias</string>
+    <string name="user_age">Edad</string>
+    <string name="user_watch">ID del reloj</string>
+    <string name="user_gender_male">Masculino</string>
+    <string name="user_gender_female">Femenino</string>
+    <string name="user_gender_other">Otro</string>
+    <string name="user_weight">Peso</string>
+    <string name="user_height">Altura</string>
+    <string name="user_terms">Acepto brindar estos datos por motivos del experimento.</string>
+
+    <string name="log_send">Enviar bitácora</string>
+    <string name="log_first">El día de hoy mi nivel de actividad física fue:</string>
+    <string name="log_first_a">Menos de lo normal</string>
+    <string name="log_first_b">Normal</string>
+    <string name="log_first_c">Más de lo normal</string>
+    <string name="log_second">Mi cantidad de sueño fue:</string>
+    <string name="log_second_a">Menos de lo normal</string>
+    <string name="log_second_b">Normal</string>
+    <string name="log_second_c">Más de lo normal</string>
+    <string name="log_third">Mi calidad de sueño al despertarme el día de hoy fue:</string>
+    <string name="log_third_a">Menos de lo normal</string>
+    <string name="log_third_b">Lo normal</string>
+    <string name="log_fourth">El día de hoy me sentí:</string>
+    <string name="log_fourth_a">Deprimido</string>
+    <string name="log_fourth_b">Tranquilo</string>
+    <string name="log_fourth_c">Contento</string>
+    <string name="log_fifth">Favor de indicar su nivel máximo de depresión durante el día:</string>
+    <string name="log_fifth_a">Leve</string>
+    <string name="log_fifth_b">Moderado</string>
+    <string name="log_fifth_c">Severo</string>
+    <string name="log_sixth">Favor de indicar el momento del día en que se sintió más deprimido:</string>
+    <string name="log_sixth_a">Mañana</string>
+    <string name="log_sixth_b">Tarde</string>
+    <string name="log_sixth_c">Noche</string>
+    <string name="log_seventh">Favor de indicar la duración del episodio de su mayor depresión:</string>
+    <string name="log_seventh_a">Menos de 1 hora</string>
+    <string name="log_seventh_b">De 1 a 2 horas</string>
+    <string name="log_seventh_c">Más de 2 horas</string>
+
+    <string name="advice_title">Nuestro consejo</string>
+    <string name="advice_1">"Anda a paso ligero de 15 a 30 minutos cada día, o baila, corre o monta en bicicleta, si lo prefieres. A las personas deprimidas no les suele apetecer estar activas. Pero, de todos modos, oblígate a hacerlo (pídele a un amigo que te acompañe si lo necesitas para estar motivado). En cuanto hagas del ejercicio un hábito, no tardarás mucho en percibir un cambio positivo en tu estado de ánimo.\nAparte del ejercicio aeróbico, algunas posturas de yoga te pueden ayudar a aliviar los sentimientos depresivos."</string>
+    <string name="advice_2">La depresión puede afectar al apetito. Cuando están deprimidas, a algunas personas no les apetece nada comer, pero hay otras pueden comer demasiado. Si la depresión ha afectado a tus hábitos alimentarios, tendrás que tener muy presente la necesidad de alimentarte bien. La nutrición puede influir en el estado de ánimo y el nivel de energía de una persona.</string>
+    <string name="advice_3">"Intenta identificar las circunstancias que han contribuido a tu depresión. Cuando sepas qué es lo que te ha hecho sentirte triste y decaído y por qué.\n Una vez hayas aireado esos pensamientos y sentimientos, centra la atención en algo positivo. Actúa para solucionar tus problemas."</string>
+    <string name="advice_4">Cuando una persona está deprimida, puede tener bloqueadas la creatividad y la capacidad para disfrutar de las cosas. Ejercita tu imaginación (pintando, dibujando, haciendo garabatos, cosiendo, escribiendo, bailando, componiendo música, etc.) y no sólo conseguirás que fluyan tus jugos creativos sino que es posible que también experimentes emociones positivas. Dedica tiempo a jugar con un amigo o con tu mascota o haz algo divertido a solas.</string>
+    <string name="advice_5">"La depresión repercute sobre los pensamientos de las personas, haciendo que todo parezca negro, desastroso, triste y negativo. Si la depresión te está haciendo fijarte solo en lo negativo, haz un esfuerzo para fijarte en las cosas buenas de la vida.\nComo ejercicio puedes hacer una lista de cosas positivas que te pasaron en tu día, te ayudará a darte cuenta que por muy mínimo puedes encontrar lados positivos."</string>
+    <string name="advice_6">"La evitación es un mecanismo de defensa que “protege” a corto plazo el hecho de experimentar emociones que pueden ser un malestar pero a largo plazo puede generar un mayor grado de depresión.\nPor lo cual trata de afrontar situaciones que te den miedo y de está manera podrás tomar mayor seguridad y con ello superar poco a poco la depresión."</string>
+    <string name="advice_7">"Una característica típica de la depresión es perder el interés por alcanzar metas u objetivos.\n Establece objetivos mayores o menores con el fin de dar ilusión es un importante estímulo para superar la depresión."</string>
+    <string name="advice_8">Ten hobbies y practicarlos todo lo que puedas.Te hará sentir vivo.Pase lo que pase o te olvides de reservar momentos para ti mismo y para hacer aquello que disfrutes.No dejes que tu estado de ánimo determine tu nivel de actividad.</string>
+    <string name="advice_9">No te encierres en ti mismo, es importante que quites corazas y permitas que alguien conozca cómo te sientes, recuerda que la vida es muy corta para sufrir más tiempo del necesario.</string>
+    <string name="advice_10">¡Comienza HOY a moverte! Da AHORA el primer paso y pasito a pasito lograrás superar la depresión y volver a recuperar tu vitalidad.</string>
+
+    <string name="notification">Sin notificaciones</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+</resources>
