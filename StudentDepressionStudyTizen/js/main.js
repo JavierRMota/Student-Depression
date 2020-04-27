@@ -35,6 +35,7 @@ const dataFreq = 1000;
 function getId() {
 	try {
     	dataId = tizen.preference.getValue('deviceId');
+    	sensorDataHistory.ID = dataId;
     	setTimeout(sendData, 1000 * 60);
 		setData('#deviceID', 'ID: '+dataId);
     } catch (e) {
@@ -82,6 +83,7 @@ function sendData() {
 	const MGU = JSON.stringify(sensorDataHistory.MGU);
 	const PRO = JSON.stringify(sensorDataHistory.PRO);
 	const ULV = JSON.stringify(sensorDataHistory.ULV);
+	const data2 = JSON.stringify(sensorDataHistory);
 	sensorDataHistory = {
 			ACC: [],
 			LAC:[],
@@ -95,7 +97,8 @@ function sendData() {
 			MGN:[],
 			MGU:[],
 			PRO:[],
-			ULV: []
+			ULV: [],
+			ID: dataId
 	};
 	sendingData = false;
 	var dataExists = false;
@@ -214,7 +217,7 @@ function sendData() {
             console.log(this.responseText);
         }
     };
-	xhr.send(data);
+	xhr.send(data2);
 	
 
 	setTimeout(sendData, 1000 * 60);
