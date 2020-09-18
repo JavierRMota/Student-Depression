@@ -42,8 +42,12 @@ public class MainActivity extends AppCompatActivity {
     private HealthConnectionErrorResult mConnError;
     public static final String APP_TAG = "Student_Stress_Study";
     private HeartRateReader mReporterHR;
-    private SleepStageReader mReporterSleep;
+    private SleepStageReader mReporterSleepStage;
     private ExerciseReader mReporterEx;
+    private StepReader  mReporterStep;
+    private SleepReader mReporterSleep;
+    private BloodPressureReader mReporterBP;
+    private TemperatureReader mReporterT;
 
 
 
@@ -119,8 +123,12 @@ public class MainActivity extends AppCompatActivity {
         // Request the connection to the health data store
         mStore.connectService();
         mReporterHR = new HeartRateReader(mStore, getApplicationContext());
-        mReporterSleep = new SleepStageReader(mStore, getApplicationContext());
+        mReporterSleepStage = new SleepStageReader(mStore, getApplicationContext());
+        mReporterSleep = new SleepReader(mStore, getApplicationContext());
+        mReporterStep = new StepReader(mStore, getApplicationContext());
         mReporterEx = new ExerciseReader(mStore, getApplicationContext());
+        mReporterBP = new BloodPressureReader(mStore, getApplicationContext());
+        mReporterT = new TemperatureReader(mStore, getApplicationContext());
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction;
@@ -300,6 +308,7 @@ public class MainActivity extends AppCompatActivity {
         Set<PermissionKey> pmsKeySet = new HashSet<>();
         pmsKeySet.add(new PermissionKey(HealthConstants.Exercise.HEALTH_DATA_TYPE, HealthPermissionManager.PermissionType.READ));
         pmsKeySet.add(new PermissionKey(HealthConstants.StepCount.HEALTH_DATA_TYPE, HealthPermissionManager.PermissionType.READ));
+        pmsKeySet.add(new PermissionKey(HealthConstants.BodyTemperature.HEALTH_DATA_TYPE, HealthPermissionManager.PermissionType.READ));
         pmsKeySet.add(new PermissionKey(HealthConstants.HeartRate.HEALTH_DATA_TYPE, HealthPermissionManager.PermissionType.READ));
         pmsKeySet.add(new PermissionKey(HealthConstants.Sleep.HEALTH_DATA_TYPE, HealthPermissionManager.PermissionType.READ));
         pmsKeySet.add(new PermissionKey(HealthConstants.SleepStage.HEALTH_DATA_TYPE, HealthPermissionManager.PermissionType.READ));
@@ -336,8 +345,12 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, "Getting data ready...", Toast.LENGTH_SHORT).show();
 
         mReporterHR.readHeartRate();
-        mReporterSleep.readSleepStage();
+        mReporterSleep.readSleep();
         mReporterEx.readExcercise();
+        mReporterSleepStage.readSleepStage();
+        mReporterStep.readStep();
+        mReporterT.readTemperature();
+        mReporterBP.readPressure();
     }
     public void sendData(View v) {
         Toast.makeText(this, "Sending...", Toast.LENGTH_SHORT).show();

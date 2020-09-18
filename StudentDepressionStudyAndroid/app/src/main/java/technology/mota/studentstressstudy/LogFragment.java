@@ -71,7 +71,7 @@ public class LogFragment extends Fragment implements View.OnClickListener {
                 // This puts the value (true/false) into the variable
                 boolean isChecked = checkedRadioButton.isChecked();
                 // If the radiobutton that has changed in check state is now checked...
-                if (isChecked && checkedRadioButton.getText().toString().equals(getString(R.string.log_third_a)))
+                if (isChecked && checkedRadioButton.getText().toString().equals(getString(R.string.log_fourth_a)))
                 {
                     FIFTH_TV.setVisibility(View.VISIBLE);
                     FIFTH.setVisibility(View.VISIBLE);

@@ -12,46 +12,44 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Iterator;
-import java.util.List;
 
 import static technology.mota.studentstressstudy.MainActivity.APP_TAG;
 import static technology.mota.studentstressstudy.Time.THREE_DAY;
 import static technology.mota.studentstressstudy.Time.THREE_DAY_START_UTC_TIME;
 
-public class SleepStageReader {
-
-
+public class StepReader {
     private final HealthDataResolver mResolver;
     private final Context context;
 
-    public SleepStageReader (HealthDataStore store, Context context) {
+    public StepReader (HealthDataStore store, Context context) {
         this.mResolver = new HealthDataResolver(store, null);
         this.context = context;
     }
-    public void readSleepStage() {
+    public void readStep() {
         HealthDataResolver.ReadRequest request = new HealthDataResolver.ReadRequest.Builder()
-                .setDataType(HealthConstants.SleepStage.HEALTH_DATA_TYPE)
+                .setDataType(HealthConstants.StepCount.HEALTH_DATA_TYPE)
                 .setLocalTimeRange(HealthConstants.StepCount.START_TIME, HealthConstants.StepCount.TIME_OFFSET,
                         THREE_DAY_START_UTC_TIME, THREE_DAY_START_UTC_TIME + THREE_DAY)
                 .build();
 
         try {
             mResolver.read(request).setResultListener(result -> {
-                JsonArrayList<SleepBinningData> binningDataList = new JsonArrayList<SleepBinningData>();
+                JsonArrayList<StepReader.StepBinningData> binningDataList = new JsonArrayList<StepReader.StepBinningData>();
                 try {
                     Iterator<HealthData> iterator = result.iterator();
                     while (iterator.hasNext()) {
                         HealthData data = iterator.next();
-                        binningDataList.add(new SleepBinningData(
-                                data.getInt("stage"),
+                        binningDataList.add(new StepReader.StepBinningData(
+                                data.getLong("time_offset"),
                                 data.getLong("start_time"),
-                                data.getLong("end_time")
+                                data.getLong("end_time"),
+                                data.getInt("count")
                         ));
                     }
                 } finally {
                     result.close();
                 }
-                SendFunctionality.sleepStageData = binningDataList;
+                SendFunctionality.stepData = binningDataList;
                 SendFunctionality.sendInformation(context);
             });
         } catch (Exception e) {
@@ -60,32 +58,22 @@ public class SleepStageReader {
     }
 
 
-    public static class SleepBinningData extends JSONObject {
-        public String stage = "";
+    public static class StepBinningData extends JSONObject {
+        public long time_offset = 0;
         public long start_time = 0;
         public long end_time = 0;
+        public int count = 0;
 
-        public SleepBinningData(int stage, long start, long end){
-            switch (stage) {
-                case HealthConstants.SleepStage.STAGE_AWAKE:
-                    this.stage = "AWAKE";
-                    break;
-                case HealthConstants.SleepStage.STAGE_LIGHT:
-                    this.stage = "LIGHT";
-                    break;
-                case HealthConstants.SleepStage.STAGE_DEEP:
-                    this.stage = "DEEP";
-                    break;
-                case HealthConstants.SleepStage.STAGE_REM:
-                    this.stage = "REM";
-                    break;
-            }
+        public StepBinningData(long offset, long start, long end, int count){
+            this.time_offset = offset;
             this.start_time = start;
             this.end_time = end;
+            this.count = count;
             try {
-                this.put("stage", stage);
+                this.put("offset", offset);
                 this.put("start", start);
                 this.put("end", end);
+                this.put("count", count);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -93,7 +81,7 @@ public class SleepStageReader {
 
         @Override
         public String toString() {
-            return "{\nstage: "+stage+",\nstart: "+start_time+",\nend: "+end_time+"\n}";
+            return "{\noffset: "+time_offset+",\nstart: "+start_time+",\nend: "+end_time+",\ncount: "+count+"\n}";
         }
     }
 }

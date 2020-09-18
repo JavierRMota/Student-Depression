@@ -27,7 +27,12 @@ public class SendFunctionality {
 
     public static JsonArrayList<HeartRateReader.HeartRateBinningData> heartRateData;
     public static JsonArrayList<ExerciseReader.ExcerciseBinningData> exerciseData;
-    public static JsonArrayList<SleepStageReader.SleepBinningData> sleepData;
+    public static JsonArrayList<SleepStageReader.SleepBinningData> sleepStageData;
+    public static JsonArrayList<SleepReader.SleepBinningData> sleepData;
+    public static JsonArrayList<StepReader.StepBinningData> stepData;
+    public static JsonArrayList<TemperatureReader.TemperatureBinningData> temperatureData;
+    public static JsonArrayList<BloodPressureReader.BloodPressureBinningData> bloodPressureData;
+
 
     public static void sendInformation(Context context) {
         boolean waiting = false;
@@ -43,6 +48,27 @@ public class SendFunctionality {
             Log.d(APP_TAG,"Waiting for Sleep");
             waiting = true;
         }
+
+        if (sleepStageData == null) {
+            Log.d(APP_TAG,"Waiting for Sleep Stage");
+            waiting = true;
+        }
+
+        if (stepData == null) {
+            Log.d(APP_TAG,"Waiting for Step");
+            waiting = true;
+        }
+
+        if (temperatureData == null) {
+            Log.d(APP_TAG,"Waiting for Temperature");
+            waiting = true;
+        }
+
+        if (bloodPressureData == null) {
+            Log.d(APP_TAG,"Waiting for Blood");
+            waiting = true;
+        }
+
         if (waiting) {
             Toast.makeText(context, "Still waiting", Toast.LENGTH_SHORT).show();
 
@@ -53,9 +79,12 @@ public class SendFunctionality {
         JSONObject json = new JSONObject();
         try {
             json.put("hr_data", heartRateData.toJson());
-            json.put("ss_data", sleepData.toJson());
+            json.put("ss_data", sleepStageData.toJson());
+            json.put("s_data", sleepData.toJson());
             json.put("exercise_data", exerciseData.toJson());
             json.put("id",device_id);
+            json.put("t_data", temperatureData.toJson());
+            json.put("bp_data", bloodPressureData.toJson());
         } catch (JSONException e) {
             e.printStackTrace();
         }
