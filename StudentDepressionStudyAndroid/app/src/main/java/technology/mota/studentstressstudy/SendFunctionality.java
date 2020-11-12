@@ -24,8 +24,11 @@ public class SendFunctionality {
     public static String height;
     public static String terms;
     public static String watch;
+    public static boolean alreadyWating = false;
 
     public static JsonArrayList<HeartRateReader.HeartRateBinningData> heartRateData;
+    public static JsonArrayList<HeartRateReader.HeartRateBinningData> rawHearRate;
+
     public static JsonArrayList<ExerciseReader.ExcerciseBinningData> exerciseData;
     public static JsonArrayList<SleepStageReader.SleepBinningData> sleepStageData;
     public static JsonArrayList<SleepReader.SleepBinningData> sleepData;
@@ -38,6 +41,10 @@ public class SendFunctionality {
         boolean waiting = false;
         if (heartRateData == null) {
             Log.d(APP_TAG,"Waiting for HR");
+            waiting = true;
+        }
+        if (rawHearRate == null) {
+            Log.d(APP_TAG,"Waiting for RawHR");
             waiting = true;
         }
         if (exerciseData == null) {
@@ -69,9 +76,12 @@ public class SendFunctionality {
             waiting = true;
         }
 
-        if (waiting) {
+        if (waiting && !SendFunctionality.alreadyWating) {
             Toast.makeText(context, "Still waiting", Toast.LENGTH_SHORT).show();
-
+            SendFunctionality.alreadyWating = true;
+            return;
+        }
+        if (waiting && SendFunctionality.alreadyWating) {
             return;
         }
 
@@ -85,6 +95,8 @@ public class SendFunctionality {
             json.put("id",device_id);
             json.put("t_data", temperatureData.toJson());
             json.put("bp_data", bloodPressureData.toJson());
+            json.put("step_data", stepData.toJson());
+            json.put("raw_hr",rawHearRate.toJson());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -103,6 +115,7 @@ public class SendFunctionality {
                             String error  = response.getString("error");
                             if ("false".equalsIgnoreCase(error)) {
                                 Toast.makeText(context, "Data sent", Toast.LENGTH_SHORT).show();
+                                alreadyWating = false;
                             } else {
                                 Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
                             }
@@ -129,7 +142,6 @@ public class SendFunctionality {
                 ||  age.isEmpty()
                 || weight.isEmpty()
                 || height.isEmpty()
-                || watch.isEmpty()
                 || terms.equals("F")
         ) {
             Toast.makeText(context, "Por favor ingresa todos los datos", Toast.LENGTH_SHORT).show();
@@ -149,6 +161,7 @@ public class SendFunctionality {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        Log.d(APP_TAG, json.toString());
         Toast.makeText(context, "Sending...", Toast.LENGTH_SHORT).show();
         AndroidNetworking.post("https://mota.technology/StudentDepression/API/UPDATE/")
                 .addJSONObjectBody(json)
@@ -181,7 +194,6 @@ public class SendFunctionality {
                             edit.putString("WATCH", watch);
                             edit.commit();
                             Toast.makeText(context, "Data Updated: "+device_id , Toast.LENGTH_SHORT).show();
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -204,7 +216,6 @@ public class SendFunctionality {
                 ||  age.isEmpty()
                 || weight.isEmpty()
                 || height.isEmpty()
-                || watch.isEmpty()
                 || terms.equals("F")
         ) {
             Toast.makeText(context, "Por favor ingresa todos los datos", Toast.LENGTH_SHORT).show();
@@ -223,6 +234,7 @@ public class SendFunctionality {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        Log.d(APP_TAG, json.toString());
         Toast.makeText(context, "Sending...", Toast.LENGTH_SHORT).show();
         AndroidNetworking.post("https://mota.technology/StudentDepression/API/NEW/")
                 .addJSONObjectBody(json)
@@ -278,10 +290,10 @@ public class SendFunctionality {
             json.put("SIXTH", sixthText);
             json.put("SEVENTH", seventhText);
             json.put("DEVICE_ID", device_id);
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        Log.d(APP_TAG, json.toString());
         Toast.makeText(context, "Sending...", Toast.LENGTH_SHORT).show();
 
         AndroidNetworking.post("https://mota.technology/StudentDepression/API/LOG/")
@@ -309,7 +321,4 @@ public class SendFunctionality {
                     }
                 });
     }
-
-
-
 }

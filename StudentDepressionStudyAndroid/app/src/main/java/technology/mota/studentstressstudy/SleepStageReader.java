@@ -83,7 +83,7 @@ public class SleepStageReader {
             this.start_time = start;
             this.end_time = end;
             try {
-                this.put("stage", stage);
+                this.put("stage", this.stage);
                 this.put("start", start);
                 this.put("end", end);
             } catch (JSONException e) {

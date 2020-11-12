@@ -5,7 +5,7 @@ import java.util.TimeZone;
 
 
 public class Time {
-    public static final long THREE_DAY = 24 * 60 * 60 * 1000 * 3;
+    public static final long THREE_DAY = 24 * 60 * 60 * 1000 * 30 * 12;
     public static final long THREE_DAY_START_UTC_TIME;
     public  static final long TODAY_START_UTC_TIME;
     static {

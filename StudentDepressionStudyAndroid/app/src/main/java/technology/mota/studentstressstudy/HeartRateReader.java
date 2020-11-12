@@ -8,11 +8,13 @@ import com.samsung.android.sdk.healthdata.HealthConstants;
 import com.samsung.android.sdk.healthdata.HealthData;
 import com.samsung.android.sdk.healthdata.HealthDataResolver;
 import com.samsung.android.sdk.healthdata.HealthDataStore;
+import com.samsung.android.sdk.healthdata.HealthDataUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Iterator;
+import java.util.List;
 
 import static technology.mota.studentstressstudy.MainActivity.APP_TAG;
 import static technology.mota.studentstressstudy.Time.THREE_DAY;
@@ -39,6 +41,7 @@ public class HeartRateReader {
 
             mResolver.read(request).setResultListener(result -> {
                 JsonArrayList<HeartRateBinningData> binningDataList = new JsonArrayList<HeartRateBinningData>();
+                JsonArrayList<HeartRateBinningData> binningData = new JsonArrayList<HeartRateBinningData>();
                 try {
                     Iterator<HealthData> iterator = result.iterator();
                     while (iterator.hasNext()) {
@@ -51,11 +54,29 @@ public class HeartRateReader {
                                 data.getLong("start_time"),
                                 data.getLong("end_time")
                                 ));
+                        try{
+                        byte[] binning = data.getBlob("binning_data");
+                        if (binning != null ){
+                            List<RawHR> raw= this.getLiveData(binning);
+                            for (RawHR d: raw) {
+                                binningData.add(new HeartRateBinningData(
+                                        d.heart_rate,
+                                        d.heart_rate_min,
+                                        d.heart_rate_max,
+                                        0,
+                                        d.start_time,
+                                        d.end_time
+                                ));
+                            }
+                        }} catch(Exception e){
+
+                        }
                     }
                 } finally {
                     result.close();
                 }
                 SendFunctionality.heartRateData = binningDataList;
+                SendFunctionality.rawHearRate = binningData;
                 SendFunctionality.sendInformation(context);
             });
 
@@ -64,7 +85,18 @@ public class HeartRateReader {
         }
     }
 
-
+    public class RawHR {
+        long start_time = 0L;
+        float heart_rate = 0.f;
+        float heart_rate_max = 0.f;
+        float heart_rate_min = 0.f;
+        long end_time = 0L;
+    }
+    public List<RawHR> getLiveData(byte[] zip) {
+        // decompress ZIP
+        List<RawHR> liveDataList = HealthDataUtil.getStructuredDataList(zip, RawHR.class);
+        return liveDataList;
+    }
     public static class HeartRateBinningData extends JSONObject {
         public float heart_rate = 0f;
         public float heart_rate_min = 0f;
