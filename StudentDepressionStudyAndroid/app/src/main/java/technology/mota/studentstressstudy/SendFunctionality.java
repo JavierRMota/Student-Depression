@@ -9,9 +9,12 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.androidnetworking.interfaces.UploadProgressListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.File;
 
 import static technology.mota.studentstressstudy.MainActivity.APP_TAG;
 
@@ -320,5 +323,39 @@ public class SendFunctionality {
                         Toast.makeText(context, "Data response not received", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+    public static void sendFile(Context context, String filepath) {
+        File file = new File(filepath);
+        AndroidNetworking.upload("https://mota.technology/StudentDepression/API/FILE/")
+                .addMultipartFile("file", file)
+                .setPriority(Priority.HIGH)
+                .build()
+                .setUploadProgressListener(new UploadProgressListener() {
+                    @Override
+                    public void onProgress(long bytesUploaded, long totalBytes) {
+                        // do anything with progress
+                    }
+                })
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
+                            String error  = response.getString("error");
+                            if ("false".equalsIgnoreCase(error)) {
+                                Toast.makeText(context, "Sent", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        Toast.makeText(context, "Data response not received", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
     }
 }

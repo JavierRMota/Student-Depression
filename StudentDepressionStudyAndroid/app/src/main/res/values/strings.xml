@@ -2,6 +2,8 @@
     <string name="app_name">Estudio de depresión en alumnos</string>
     <string name="title_home">Inicio</string>
     <string name="title_log">Bitacora</string>
+    <string name="title_voice">Voz</string>
+
     <string name="title_dashboard">Información</string>
     <string name="title_notifications">Notificaciones</string>
 
@@ -79,8 +81,19 @@
 
     <string name="notification">Sin notificaciones</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="audioText">"Los participantes en la conferencia fueron después a El Escorial. Arrivaron ahí en autobús, donde un guía les explicó los monumentos mas representativos del viaje. La visita al monasterio fué comentada por el mismo guia, que debe conocer mucho de El Greco, cuya imagen "El martirio de San Mauricio" ha sido extensamente comentada; su conocimiento del resto de las imagenes en el museo no debe ser el mismo, ya que los atravesó de forma rápida, dando lugar a sonrisas." [1]</string>
+    <string name="audioRef">[1] Montero, J. M., Gutiérrez-Arriola, J., Palazuelos, S., Enríquez, E., Aguilera, S., and Pardo, J. M., "Emotional Speech Synthesis: From Speech Database to TTS", Proc. of ICSLP’98, pp. 923-925, Sydney, Australia, 1998.</string>
+    <string name="audioDesc">Para empezar a grabar presiona el botón</string>
+    <string name="preview">Vista previa</string>
+    <string name="playing">Reproduciendo</string>
+    <string name="notPlaying">En espera</string>
+    <string name="ended">Finalizado</string>
+    <string name="stopped">Detenido</string>
+    <string name="sendAudio">Enviar archivo</string>
+    <string name="removeAudio">Eliminar</string>
+    <string name="audioFreeText">En esta sección, cuéntanos algo de tu día</string>
+    <string name="recordingInstructions">Por favor selecciona cada botón una vez por día.</string>
+    <string name="customBtnText">Grabación libre.</string>
+    <string name="textBtnText">Grabación texto.</string>
 
 </resources>

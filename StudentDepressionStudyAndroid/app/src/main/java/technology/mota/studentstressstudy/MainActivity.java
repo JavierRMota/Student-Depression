@@ -104,6 +104,17 @@ public class MainActivity extends AppCompatActivity {
                     transaction.addToBackStack(null);
                     transaction.commit();
                     return true;
+                case R.id.navigation_voice:
+                    Fragment record = fragmentManager.findFragmentByTag("record");
+                    if (record == null) {
+                        record = new RecordingOptionFragment();
+                    }
+                    transaction = fragmentManager.beginTransaction();
+                    transaction.replace(R.id.fragment, record, "record");
+                    transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN); //setting animation for fragment transaction
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+                    return true;
             }
             return false;
         }
